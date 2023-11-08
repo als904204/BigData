@@ -9,12 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>서울 지하철 혼잡 분석</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
 
 </head>
 
@@ -25,7 +26,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+        Hello
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -265,13 +266,33 @@
                                     <h6 class="m-0 font-weight-bold text-primary">그래프3</h6>
                                 </div>
                                 <div class="card-body">
-
+                                    <div>
+                                        <canvas id="myChart1"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">그래프4</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <canvas id="myChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-                <!-- /.container-fluid -->
+
 
             </div>
             <!-- End of Main Content -->
@@ -322,6 +343,8 @@
     <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
     <script th:src="@{/js/demo/chart-area-demo.js}"></script>
     <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+    <script th:src="@{/js/myChart1.js}"></script>
+    <script th:src="@{/js/myChart2.js}"></script>
 
 </body>
 
