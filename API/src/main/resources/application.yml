@@ -1,9 +1,14 @@
 spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/queryDsl?allowPublicKeyRetrieval=true&useSSL=false
-    username: user
-    password: pwd
+    url: jdbc:mariadb://localhost:3306/bigdata?allowPublicKeyRetrieval=true&useSSL=false
+    username: {userame}
+    password: {password}
 
   jpa:
     hibernate:

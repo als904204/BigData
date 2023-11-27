@@ -9,293 +9,351 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>서울 지하철 혼잡 분석</title>
+
+
+
+    <title>빅 데이터 - 주식 분석</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<!--    todo : 삭제 cdn 으로 받음-->
+<!--    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">-->
     <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery/jquery-3.7.1.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+
 
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
+        <!-- 사이드 메뉴 바 START -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        Hello
-            <!-- Sidebar - Brand -->
+
+            <!-- 메인 홈 -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fa fa-bar-chart-o"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">무야호</div>
+                <div class="sidebar-brand-text mx-3">주식 분석</div>
             </a>
 
-            <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>현재 주식 종목(실제 종목 값)</span></a>
             </li>
 
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                호놀룰루1
+                메뉴
             </div>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - 메뉴 바 1 -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>카테코리1</span></a>
+                    <span>메뉴1</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - 메뉴 바 2 -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>메뉴2</span></a>
+            </li>
+
+            <!-- Nav Item - 메뉴 바 3 -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>카테코리2</span></a>
+                    <span>메뉴3</span></a>
             </li>
 
-            <!-- Divider -->
+            <!-- Nav Item - 메뉴 바 4 -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>메뉴4</span></a>
+            </li>
+
             <hr class="sidebar-divider d-none d-md-block">
         </ul>
-        <!-- End of Sidebar -->
+        <!-- 사이드 메뉴 바 END -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
+            <!-- MAIN START -->
             <div id="content">
 
-                <!-- Topbar -->
+                <!-- 네비바 START -->
+
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                    <p class="h5 mb-0 font-weight-bold text-gray-800 mr-2" id="nav-stock-name">Hello</p>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800 mr-2" id="lastDate"></div>
+                    <span class="h5 mb-0 font-weight-bold text-gray-800">기준</span>
+                    <!-- 파일 업로드 섹션 -->
+                    <div class="ml-auto">
+                        <form id="fileUploadForm" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="fileInput" style="display: none;" onchange="onFileSelect();" />
+                            <button type="button" id="selectButton" class="btn btn-lg btn-success shadow-sm" onclick="document.getElementById('fileInput').click();">
+                                <i class="fas fa-upload fa-sm text-white-50"></i> 파일선택
+                            </button>
+                            <button type="submit" id="uploadButton" class="btn btn-lg btn-primary" style="display: none;">업로드</button>
+                            <button type="button" id="cancelButton" class="btn btn-lg btn-danger" style="display: none;" onclick="onCancel();">취소</button>
+                        </form>
+                    </div>
+                    <!-- 파일 업로드 END -->
                 </nav>
-                <!-- End of Topbar -->
+                <!-- 네비바 END -->
 
-                <!-- Begin Page Content -->
+                <!-- 업로드,차트 그리기 START -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> csv 파일 다운로드</a>
-                    </div>
-
-                    <!-- Content Row -->
+                    <!-- 미리보기 박스 START -->
                     <div class="row">
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">에시 1</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">예시1 값</div>
+                                            <span class="text-sm font-weight-bold text-danger text-uppercase mb-1 pr-1">종가</span>
+                                            <div  class="h5 mb-0 font-weight-bold text-gray-800" id="currentClose"></div>
+                                            <small class="text-muted align-baseline" id="prevClose"></small>
+                                            <div>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="closeDiff">차이</small>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="closePercentage"></small>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-handshake-slash fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-md-6 mb-4">
+
+
+                        <div class="col-xl-2 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">예시 2</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">예시 2 값</div>
+                                            <span class="text-sm font-weight-bold text-success text-uppercase mb-1 pr-1">고가</span>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentHigh"></div>
+                                            <small class="text-muted align-baseline" id="prevHigh"></small>
+                                            <div>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="highDiff">차이</small>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="highPercentage"></small>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-arrow-trend-up fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-2 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <span class="text-sm font-weight-bold text-primary text-uppercase mb-1 pr-1">저가</span>
+
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentLow"></div>
+                                            <small class="text-muted align-baseline" id="prevLow"></small>
+                                            <div>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="lowDiff">차이</small>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="lowPercentage"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-arrow-trend-down fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">예시3
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">예시3 퍼센트%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
+                                            <span class="text-sm font-weight-bold text-info text-uppercase mb-1 pr-1">평균</span>
+
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentAvgPrice"></div>
+                                            <small class="text-muted align-baseline" id="prevAvgPrice"></small>
+                                            <div>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="avgDiff">차이</small>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="avgPercentage"></small>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card border-left-secondary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">예시4</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">예시4 개수</div>
+                                            <span class="text-sm font-weight-bold text-secondary text-uppercase mb-1 pr-1">거래량</span>
+
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentVolume"></div>
+                                            <small class="text-muted align-baseline" id="prevVolume"></small>
+                                            <div>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="volumeDiff">차이</small>
+                                                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="volumePercentage"></small>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-bomb fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- 미리보기 박스 END -->
 
-                    <!-- Content Row -->
-
+                    <!-- Row1 START -->
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <!-- 차트1 START -->
+                        <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Charts.js 그래프 그리기1</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary pl-2"><span class="pr-1" id="stock-name">종목이름</span>종가</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle" href="#" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         </a>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                        <canvas id="chart1"></canvas>
+                                    </div>
+                                    <hr class="my-3"> <!-- 구분선 추가 -->
+                                    <div class="row justify-content-center mt-3">
+                                        <div class="col-md-2">
+                                            <button class="btn btn-danger btn-block" id="closeButton">종가 그래프</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-success btn-block" id="highButton">고가 그래프</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary btn-block" id="lowButton">저가 그래프</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-secondary btn-block" id="volumeButton">거래량 그래프</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-info btn-block" id="movingButton">이동평균 그래프</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Charts.js 그래프 그리기2</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                                    </div>
-                                </div>
                             </div>
+
                         </div>
+                        <!-- 차트1 END -->
+
+
+
+
                     </div>
+                    <!-- Row1 END -->
 
-                    <!-- Content Row -->
+                    <!-- Row2 START -->
                     <div class="row">
 
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
 
-                            <!-- Project Card Example -->
+                        <!-- 차트2 START -->
+                        <div class="col-lg-9 mb-4">
+                            <!-- 차트2 Header  -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">그래프3</h6>
                                 </div>
+                                <!-- 차트2 Body  -->
                                 <div class="card-body">
-                                    <div>
-                                        <canvas id="myChart1"></canvas>
+                                    <div id="chart2">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- 차트2 END -->
 
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">그래프4</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div>
-                                        <canvas id="myChart2"></canvas>
+                            <!-- 차트3 START -->
+                            <div class="col-xl-3 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- 차트3 Header  -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">통계(최고,평균,최저)</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- 차트3 Body  -->
+                                    <div class="card-body">
+                                        <div class="text-left small">
+                                            <div class="mb-2">
+                                                <div>
+                                                    <i class="fas fa-circle text-info mr-1"></i>최고가<span id="highestPrice" class="mr-2"></span>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-circle text-primary mr-1"></i>평균가<span id="averagePrice" class="mr-2"></span>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-circle text-success mr-1"></i>최저가<span id="lowestPrice" class="mr-2"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="chart3"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
+                            <!-- 차트3 END -->
                     </div>
+
+                    <!-- Row2 END -->
                 </div>
-
-
+                <!-- 업로드,차트 그리기 END -->
             </div>
-            <!-- End of Main Content -->
+            <!-- MAIN END -->
+
+
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -308,43 +366,22 @@
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
-
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- charts.js -->
     <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
-    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
-    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
-    <script th:src="@{/js/myChart1.js}"></script>
-    <script th:src="@{/js/myChart2.js}"></script>
+    <script th:src="@{/js/charts/charts.js}" defer></script>
+    <script th:src="@{/js/charts/fileUpload.js}" defer></script>
+    <script th:src="@{/js/charts/headerMenu.js}" defer></script>
+
+    <!-- 실제 chart 그리는 js -->
+    <script th:src="@{/js/charts/draw/chart1.js}" defer></script>
+    <script th:src="@{/js/charts/draw/chart2.js}" defer></script>
+    <script th:src="@{/js/charts/draw/chart3.js}" defer></script>
+
+    <!-- config -->
+    <script th:src="@{/js/config/storage.js}" defer></script>
+    <script th:src="@{/js/config/serverStatus.js}" defer></script>
 
 </body>
 
