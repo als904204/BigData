@@ -2130,7 +2130,7 @@ var helpers = {
 
 	/**
 	 * Returns true if `value` is neither null nor undefined, else returns false.
-	 * @param {*} value - The value to test.
+	 * @param {*} value - The value to fragment.
 	 * @returns {boolean}
 	 * @since 2.7.0
 	 */
@@ -2140,7 +2140,7 @@ var helpers = {
 
 	/**
 	 * Returns true if `value` is an array (including typed arrays), else returns false.
-	 * @param {*} value - The value to test.
+	 * @param {*} value - The value to fragment.
 	 * @returns {boolean}
 	 * @function
 	 */
@@ -2157,7 +2157,7 @@ var helpers = {
 
 	/**
 	 * Returns true if `value` is an object (excluding null), else returns false.
-	 * @param {*} value - The value to test.
+	 * @param {*} value - The value to fragment.
 	 * @returns {boolean}
 	 * @since 2.7.0
 	 */
@@ -2167,7 +2167,7 @@ var helpers = {
 
 	/**
 	 * Returns true if `value` is a finite number, else returns false
-	 * @param {*} value  - The value to test.
+	 * @param {*} value  - The value to fragment.
 	 * @returns {boolean}
 	 */
 	isFinite: function(value) {
@@ -2901,7 +2901,7 @@ var exports$1 = {
 
 	/**
 	 * Returns true if the point is inside the rectangle
-	 * @param {object} point - The point to test
+	 * @param {object} point - The point to fragment
 	 * @param {object} area - The rectangle
 	 * @returns {boolean}
 	 * @private
@@ -6911,7 +6911,7 @@ var core_interaction = {
 		},
 
 		/**
-		 * Point mode returns all elements that hit test based on the event position
+		 * Point mode returns all elements that hit fragment based on the event position
 		 * of the event
 		 * @function Chart.Interaction.modes.intersect
 		 * @param {Chart} chart - the chart we are returning items from
@@ -6939,7 +6939,7 @@ var core_interaction = {
 		},
 
 		/**
-		 * x mode returns the elements that hit-test at the current x coordinate
+		 * x mode returns the elements that hit-fragment at the current x coordinate
 		 * @function Chart.Interaction.modes.x
 		 * @param {Chart} chart - the chart we are returning items from
 		 * @param {Event} e - the event we are find things at
@@ -6970,7 +6970,7 @@ var core_interaction = {
 		},
 
 		/**
-		 * y mode returns the elements that hit-test at the current y coordinate
+		 * y mode returns the elements that hit-fragment at the current y coordinate
 		 * @function Chart.Interaction.modes.y
 		 * @param {Chart} chart - the chart we are returning items from
 		 * @param {Event} e - the event we are find things at
@@ -7076,7 +7076,7 @@ function updateDims(chartArea, params, layout) {
 	var newWidth, newHeight;
 
 	if (layout.size) {
-		// this layout was already counted for, lets first reduce old size
+		// this fragment was already counted for, lets first reduce old size
 		chartArea[layout.pos] -= layout.size;
 	}
 	layout.size = layout.horizontal ? box.height : box.width;
@@ -7097,7 +7097,7 @@ function updateDims(chartArea, params, layout) {
 		chartArea.w = newWidth;
 		chartArea.h = newHeight;
 
-		// return true if chart area changed in layout's direction
+		// return true if chart area changed in fragment's direction
 		var sizes = layout.horizontal ? [newWidth, chartArea.w] : [newHeight, chartArea.h];
 		return sizes[0] !== sizes[1] && (!isNaN(sizes[0]) || !isNaN(sizes[1]));
 	}
@@ -7205,30 +7205,30 @@ core_defaults._set('global', {
 
 /**
  * @interface ILayoutItem
- * @prop {string} position - The position of the item in the chart layout. Possible values are
+ * @prop {string} position - The position of the item in the chart fragment. Possible values are
  * 'left', 'top', 'right', 'bottom', and 'chartArea'
  * @prop {number} weight - The weight used to sort the item. Higher weights are further away from the chart area
  * @prop {boolean} fullWidth - if true, and the item is horizontal, then push vertical boxes down
- * @prop {function} isHorizontal - returns true if the layout item is horizontal (ie. top or bottom)
+ * @prop {function} isHorizontal - returns true if the fragment item is horizontal (ie. top or bottom)
  * @prop {function} update - Takes two parameters: width and height. Returns size of item
  * @prop {function} getPadding -  Returns an object with padding on the edges
  * @prop {number} width - Width of item. Must be valid after update()
  * @prop {number} height - Height of item. Must be valid after update()
- * @prop {number} left - Left edge of the item. Set by layout system and cannot be used in update
- * @prop {number} top - Top edge of the item. Set by layout system and cannot be used in update
- * @prop {number} right - Right edge of the item. Set by layout system and cannot be used in update
- * @prop {number} bottom - Bottom edge of the item. Set by layout system and cannot be used in update
+ * @prop {number} left - Left edge of the item. Set by fragment system and cannot be used in update
+ * @prop {number} top - Top edge of the item. Set by fragment system and cannot be used in update
+ * @prop {number} right - Right edge of the item. Set by fragment system and cannot be used in update
+ * @prop {number} bottom - Bottom edge of the item. Set by fragment system and cannot be used in update
  */
 
-// The layout service is very self explanatory.  It's responsible for the layout within a chart.
-// Scales, Legends and Plugins all rely on the layout service and can easily register to be placed anywhere they need
-// It is this service's responsibility of carrying out that layout.
+// The fragment service is very self explanatory.  It's responsible for the fragment within a chart.
+// Scales, Legends and Plugins all rely on the fragment service and can easily register to be placed anywhere they need
+// It is this service's responsibility of carrying out that fragment.
 var core_layouts = {
 	defaults: {},
 
 	/**
 	 * Register a box to a chart.
-	 * A box is simply a reference to an object that requires layout. eg. Scales, Legend, Title.
+	 * A box is simply a reference to an object that requires fragment. eg. Scales, Legend, Title.
 	 * @param {Chart} chart - the chart to use
 	 * @param {ILayoutItem} item - the item to add to be layed out
 	 */
@@ -7256,7 +7256,7 @@ var core_layouts = {
 	/**
 	 * Remove a layoutItem from a chart
 	 * @param {Chart} chart - the chart to remove the box from
-	 * @param {ILayoutItem} layoutItem - the item to remove from the layout
+	 * @param {ILayoutItem} layoutItem - the item to remove from the fragment
 	 */
 	removeBox: function(chart, layoutItem) {
 		var index = chart.boxes ? chart.boxes.indexOf(layoutItem) : -1;
@@ -9683,7 +9683,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Updates the chart layout unless a plugin returns `false` to the `beforeLayout`
+	 * Updates the chart fragment unless a plugin returns `false` to the `beforeLayout`
 	 * hook, in which case, plugins will not be called on `afterLayout`.
 	 * @private
 	 */
@@ -11586,7 +11586,7 @@ var Scale = core_element.extend({
 
 		me.afterUpdate();
 
-		// TODO(v3): remove minSize as a public property and return value from all layout boxes. It is unused
+		// TODO(v3): remove minSize as a public property and return value from all fragment boxes. It is unused
 		// make maxWidth and maxHeight private
 		return me.minSize;
 	},
