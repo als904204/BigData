@@ -39,7 +39,7 @@ dependencies {
 
 	// web, template
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-fragment-dialect:3.3.0'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 
