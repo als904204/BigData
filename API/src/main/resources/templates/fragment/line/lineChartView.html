@@ -1,0 +1,52 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="lineChart">
+
+  <div class="row">
+    <!-- 차트1 START -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary pl-2"><span class="pr-1" id="stock-name">종목이름</span>종가</h6>
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="chart1"></canvas>
+          </div>
+          <hr class="my-3"> <!-- 구분선 추가 -->
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-2">
+              <button class="btn btn-danger btn-block" id="closeButton">종가 그래프</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-success btn-block" id="highButton">고가 그래프</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-primary btn-block" id="lowButton">저가 그래프</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-secondary btn-block" id="volumeButton">거래량 그래프</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-info btn-block" id="movingButton">이동평균 그래프</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- 차트1 END -->
+  </div>
+  <!-- Row1 END -->
+</div>
+</html>

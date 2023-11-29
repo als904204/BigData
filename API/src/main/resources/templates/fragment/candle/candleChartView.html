@@ -1,0 +1,62 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="candleChart">
+
+  <!-- Row2 START -->
+  <div class="row">
+    <!-- 차트2 START -->
+    <div class="col-lg-9 mb-4">
+      <!-- 차트2 Header  -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">그래프3</h6>
+        </div>
+        <!-- 차트2 Body  -->
+        <div class="card-body">
+          <div id="chart2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 차트2 END -->
+
+    <!-- 차트3 START -->
+    <div class="col-xl-3 col-lg-5">
+      <div class="card shadow mb-4">
+        <!-- 차트3 Header  -->
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">통계(최고,평균,최저)</h6>
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+          </div>
+        </div>
+        <!-- 차트3 Body  -->
+        <div class="card-body">
+          <div class="text-left small">
+            <div class="mb-2">
+              <div>
+                <i class="fas fa-circle text-info mr-1"></i>최고가<span id="highestPrice" class="mr-2"></span>
+              </div>
+              <div>
+                <i class="fas fa-circle text-primary mr-1"></i>평균가<span id="averagePrice" class="mr-2"></span>
+              </div>
+              <div>
+                <i class="fas fa-circle text-success mr-1"></i>최저가<span id="lowestPrice" class="mr-2"></span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-pie pt-4 pb-2">
+            <canvas id="chart3"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 차트3 END -->
+  </div>
+</div>
+</html>

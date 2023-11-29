@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="~{fragment/layout/header :: header}"></div>
+</head>
+<body id="page-top">
+<div id="wrapper">
+  <div th:replace="~{fragment/layout/nav-left.html :: nav-left}"></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div th:replace="~{fragment/layout/nav-top-upload.html :: nav-top-upload}"></div>
+    <div class="container-fluid">
+      <div th:replace="~{fragment/layout/nav-top.html :: nav-top}"></div>
+      <!-- 여기까지 공통 -->
+
+      <!-- 여기부터 body -->
+      <div th:replace="~{fragment/line/lineChartView :: lineChart}"></div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{fragment/js/script.html :: js}"></div>
+</body>
+</html>

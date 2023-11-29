@@ -1,0 +1,31 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="nav-top-upload">
+
+  <!-- 네비바 START -->
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <div class="col-auto">
+      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+    </div>
+    <p class="h5 mb-0 font-weight-bold text-gray-800 mr-2" id="nav-stock-name">Hello</p>
+    <div class="h5 mb-0 font-weight-bold text-gray-800 mr-2" id="lastDate"></div>
+    <span class="h5 mb-0 font-weight-bold text-gray-800">기준</span>
+    <!-- 파일 업로드 섹션 -->
+    <div class="ml-auto">
+      <form id="fileUploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" style="display: none;" onchange="onFileSelect();" />
+        <button type="button" id="selectButton" class="btn btn-lg btn-success shadow-sm" onclick="document.getElementById('fileInput').click();">
+          <i class="fas fa-upload fa-sm text-white-50"></i> 파일선택
+        </button>
+        <button type="submit" id="uploadButton" class="btn btn-lg btn-primary" style="display: none;">업로드</button>
+        <button type="button" id="cancelButton" class="btn btn-lg btn-danger" style="display: none;" onclick="onCancel();">취소</button>
+      </form>
+    </div>
+    <!-- 파일 업로드 END -->
+  </nav>
+  <!-- 네비바 END -->
+
+</div>
+</html>

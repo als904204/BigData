@@ -1,0 +1,63 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<ul th:fragment="nav-left" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- 메인 홈 -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+    <div class="sidebar-brand-icon ">
+<!--      <i class="fa fa-bar-chart-o"></i>-->
+      <i class="fas fa-chart-pie"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">주식 분석</div>
+  </a>
+
+  <hr class="sidebar-divider my-0">
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link">
+      <i class="fas fa-building"></i>
+      <span>현재 주식 종목(실제 종목 값)</span></a>
+  </li>
+
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    메뉴
+  </div>
+
+  <!-- Nav Item - 메뉴 바 1 -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/chart/line}">
+    <i class="fas fa-chart-line"></i>
+      <span>Line Chart</span></a>
+  </li>
+
+  <!-- Nav Item - 메뉴 바 2 -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/chart/candle}">
+      <i class="fa-solid fa-chart-column"></i>
+      <span>Candle Chart</span></a>
+  </li>
+
+  <!-- Nav Item - 메뉴 바 3 -->
+  <li class="nav-item">
+    <a class="nav-link" href="tables.html">
+      <i class="fas fa-fw fa-table"></i>
+      <span>메뉴3</span></a>
+  </li>
+
+  <!-- Nav Item - 메뉴 바 4 -->
+  <li class="nav-item">
+    <a class="nav-link" href="tables.html">
+      <i class="fas fa-fw fa-table"></i>
+      <span>메뉴4</span></a>
+  </li>
+
+  <hr class="sidebar-divider d-none d-md-block">
+</ul>
+
+</uo>
+</html>

@@ -1,0 +1,130 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="nav-top">
+  <!-- 미리보기 박스 START -->
+  <div class="row">
+
+    <!-- 종가 START -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <span class="text-sm font-weight-bold text-danger text-uppercase mb-1 pr-1">종가</span>
+              <div  class="h5 mb-0 font-weight-bold text-gray-800" id="currentClose"></div>
+              <small class="text-muted align-baseline" id="prevClose"></small>
+              <div>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="closeDiff">차이</small>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="closePercentage"></small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-handshake-slash fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 종가 END -->
+
+    <!-- 고가 START -->
+    <div class="col-xl-2 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <span class="text-sm font-weight-bold text-success text-uppercase mb-1 pr-1">고가</span>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentHigh"></div>
+              <small class="text-muted align-baseline" id="prevHigh"></small>
+              <div>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="highDiff">차이</small>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="highPercentage"></small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-arrow-trend-up fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 고가 END -->
+
+    <!-- 저가 START -->
+    <div class="col-xl-2 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <span class="text-sm font-weight-bold text-primary text-uppercase mb-1 pr-1">저가</span>
+
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentLow"></div>
+              <small class="text-muted align-baseline" id="prevLow"></small>
+              <div>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="lowDiff">차이</small>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="lowPercentage"></small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-arrow-trend-down fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 저가 END -->
+
+    <!-- 평균 START -->
+    <div class="col-xl-2 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <span class="text-sm font-weight-bold text-info text-uppercase mb-1 pr-1">평균</span>
+
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentAvgPrice"></div>
+              <small class="text-muted align-baseline" id="prevAvgPrice"></small>
+              <div>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="avgDiff">차이</small>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="avgPercentage"></small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-won-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 평균 END -->
+
+    <!-- 거래량 START -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-secondary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <span class="text-sm font-weight-bold text-secondary text-uppercase mb-1 pr-1">거래량</span>
+
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentVolume"></div>
+              <small class="text-muted align-baseline" id="prevVolume"></small>
+              <div>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="volumeDiff">차이</small>
+                <small class="text-xs font-weight-bold text-secondary text-uppercase mb-1" id="volumePercentage"></small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-bomb fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 거래량 END -->
+
+
+</div>
+</html>

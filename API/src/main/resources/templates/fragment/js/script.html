@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="js">
+    <!-- charts.js -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/js/charts/charts.js}" defer></script>
+    <script th:src="@{/js/charts/fileUpload.js}" defer></script>
+    <script th:src="@{/js/charts/headerMenu.js}" defer></script>
+
+    <!-- 실제 chart 그리는 js -->
+    <script th:src="@{/js/charts/draw/chart1.js}" defer></script>
+    <script th:src="@{/js/charts/draw/chart2.js}" defer></script>
+    <script th:src="@{/js/charts/draw/chart3.js}" defer></script>
+
+    <!-- config -->
+    <script th:src="@{/js/config/storage.js}" defer></script>
+    <script th:src="@{/js/config/serverStatus.js}" defer></script>
+</div>
+</html>
