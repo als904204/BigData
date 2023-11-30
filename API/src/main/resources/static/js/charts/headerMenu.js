@@ -8,7 +8,8 @@ function fetchStockDateRangeData(companyName){
       console.log("success to load data for ", companyName);
       $('#firstDate').text(data.firstDate);
       $('#lastDate').text(data.lastDate);
-      $('#nav-stock-name').text(companyName.toUpperCase());
+      $('#nav-stock-name-top').text(companyName.toUpperCase());
+      $('#nav-stock-name-left').text(companyName.toUpperCase());
     },
     error: function (error){
       console.error('Error fetching stock data:', error);
