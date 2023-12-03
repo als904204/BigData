@@ -1,6 +1,7 @@
 package com.example.bigdata.stock.controller;
 
 import com.example.bigdata.stock.dto.StockDto.DateRangeDtoRes;
+import com.example.bigdata.stock.dto.StockDto.PredictedDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockStatisticsDtoRes;
 import com.example.bigdata.stock.dto.StockDto.CurrentAndPreviousStock;
@@ -37,6 +38,13 @@ public class StockController {
         List<StockDtoRes> stocks = stockService.getStockDataByCompany(company);
         return ResponseEntity.ok(stocks);
     }
+
+    @GetMapping("/predicted/{company}")
+    public ResponseEntity<PredictedDtoRes> getStockPredicted(@PathVariable String company) {
+        PredictedDtoRes stockPredicted = stockService.getStockPredicted(company);
+        return ResponseEntity.ok(stockPredicted);
+    }
+
 
     // {company} 에 해당하는 최근,어제 데이터 조회
     @GetMapping("/yesterday/{company}")

@@ -4,6 +4,7 @@ import com.example.bigdata.stock.entity.Stock;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -72,33 +73,14 @@ public class StockDto {
         private LocalDate lastDate;
     }
 
-    @ToString
     @Getter
     @AllArgsConstructor
-    public static class TestDto{
+    public static class PredictedDtoRes{
 
-        private String company;
+        // 예측가
+        private Double predicted;
+        private LocalDate predictedDate;
 
-        // 날짜
-        private LocalDate date;
-
-        // 시가
-        private Integer open;
-
-        // 고가
-        private Integer high;
-
-        // 저가
-        private Integer low;
-
-        // 종가
-        private Integer close;
-
-        // 거래량
-        private Integer volume;
-
-        // 변동률
-        private BigDecimal changes;
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.bigdata.stock.service;
 
 import com.example.bigdata.stock.dto.StockDto.DateRangeDtoRes;
+import com.example.bigdata.stock.dto.StockDto.PredictedDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockStatisticsDtoRes;
 import com.example.bigdata.stock.dto.StockDto.CurrentAndPreviousStock;
@@ -127,6 +128,20 @@ public class StockService {
                     + currentStock.getLow()
                     + currentStock.getClose())
             .divide(BigDecimal.valueOf(4), 2, RoundingMode.HALF_UP);
+    }
+
+    // Stock 예측가
+    public PredictedDtoRes getStockPredicted(String company) {
+        LocalDate firstStockDate = stockRepository.findFirstDateByCompany(company)
+            .orElseThrow(() -> new RuntimeException("There is no stock data"));
+
+        LocalDate lastStockDate = stockRepository.findLastDateByCompany(company)
+            .orElseThrow(() -> new RuntimeException("There is no stock data"));
+
+        Stock firstStock = stockRepository.findByCompanyAndDate(company, firstStockDate)
+            .orElseThrow(() -> new RuntimeException("There is no stock data"));
+        Double predicted = firstStock.getPredicted();
+        return new PredictedDtoRes(predicted, lastStockDate);
     }
 
     /**
@@ -264,5 +279,6 @@ public class StockService {
         long count = stockRepository.count();
         return count > 0; // 데이터가 하나라도 있으면 true, 없으면 false
     }
+
 
 }
