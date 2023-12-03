@@ -5,43 +5,66 @@
 <div th:fragment="infoChart">
 
   <!-- Row START -->
-  <div class="row">
+  <div class="row container">
+
+    <!-- Prediction Card START -->
+    <div class="col-lg-5 mb-4">
+      <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">AI를 이용한 다음 종가 예측</h6>
+      </div>
+        <div class="card-body">
+          <span>AI를 이용한 다음 예측 값은(<small id="predicted-date" class="text-muted font-weight-bold"></small>)
+          <span id="predicted" class="text-muted font-weight-bold mb4"></span> 입니다
+          </span>
+          <br/>
+          <span>if up 전날 대비 1원이 올랐습니다</span>
+          <br/>
+          <span>if down 전날 대비 1원이 올랐습니다</span>
+          <br/>
+          <span>주의: 쏼라쏼라</span>
+          <small class="mt-5">
+
+          </small>
+        </div>
+      </div>
+    </div>
+    <!-- Prediction Card END -->
+
+    <div class="col-lg-7 mb-4">
+      <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">AI예측 방법</h6>
+      </div>
+        <div class="card-body">
+
+          내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+
+        </div>
+      </div>
+    </div>
+
     <div class="col-lg-12 mb-4">
-      <!-- Prediction Card START -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">예측 정보</h6>
+              <h6 class="m-0 font-weight-bold text-primary">최근 뉴스</h6>
         </div>
-        <div class="card-body">
-          <h5 id="predicted" class="font-weight-bold">예측값을 불러오는 중입니다...</h5>
-          <h6 id="predicted-date" class="text-muted">예측날짜를 불러오는 중입니다...</h6>
-        </div>
-      </div>
-      <!-- Prediction Card END -->
-
-      <!-- News Card START -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">최근 뉴스</h6>
-        </div>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">뉴스 제목 1</li>
-            <li class="list-group-item">뉴스 제목 2</li>
-            <li class="list-group-item">뉴스 제목 3</li>
-            <!-- 추가 뉴스 제목 -->
-          </ul>
+            <div class="card-body">
+              <ul class="list-group list-group-flush" id="news-list">
+                <li class="pl-3 mb-1 font-weight-bold news-title">뉴스 제목(데이터를 불러오는 중입니다)</li>
+                <li class="pl-3 mb-1" style="border: none">뉴스 내용(데이터를 불러오는 중입니다)</li>
+                <li class="pl-3 mb-1">
+                  <small>뉴스 회사(데이터를 불러오는 중입니다)</small>
+                  <small class="opacity-50"> | </small>
+                  <small>날짜(데이터를 불러오는 중입니다)</small>
+                  <hr/>
+                </li>
+              </ul>
+            </div>
         </div>
       </div>
 
-      <dd class="cont">
-        <a href="/news/005930/stockView?vNewsSetId=&amp;articleId=2023120318373000569&amp;currentPageNo=1&amp;stockCode=005930">삼성·SK하이닉스 신메모리 전쟁삼성 내년 월 최대 17만장 생산↑SK하이닉스와 47~49% 점유 접전'HBM 생산역량’ 시장 1위 가늠자                               '챗GPT'가 쏘아올린 생성형 인공지능(AI) 반도체 …</a>
-      </dd>
-      <dd class="date">
-        <span>파이낸셜뉴스</span>
-        <span>2023.12.03 18:37</span>
 
-      </dd>
       <!-- News Card END -->
 
       <!-- Investment Opinion Card START -->
@@ -55,7 +78,6 @@
       </div>
       <!-- Investment Opinion Card END -->
     </div>
-  </div>
   <!-- Row END -->
 
 

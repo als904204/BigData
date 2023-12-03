@@ -136,19 +136,19 @@ public class StockService {
             .divide(BigDecimal.valueOf(4), 2, RoundingMode.HALF_UP);
     }
 
-    // Stock 예측 가
+    // Stock 예측 값,예측 날짜,예측 전 날짜
     public PredictedDtoRes getStockPredicted(String company) {
         LocalDate firstStockDate = stockRepository.findFirstDateByCompany(company)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
 
         LocalDate lastStockDate = stockRepository.findLastDateByCompany(company)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
-        lastStockDate = lastStockDate.plusDays(1);
+        LocalDate predictedDate = lastStockDate.plusDays(1);
 
         Stock firstStock = stockRepository.findByCompanyAndDate(company, firstStockDate)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
         Double predicted = firstStock.getPredicted();
-        return new PredictedDtoRes(predicted, lastStockDate);
+        return new PredictedDtoRes(predicted, lastStockDate,predictedDate);
     }
 
     /**

@@ -3,3 +3,26 @@
   justify-content: center;
   align-items: center;
 }
+
+.list-group-item {
+  border: none
+}
+
+.list-group-flush {
+  list-style-type: none; /* 점 제거 */
+}
+
+.news-title {
+  color: #000000; /* 검은색 */
+  font-weight: bold; /* 더 진하게 */
+  font-size: 1.1em; /* 글씨 크기 증가 */
+}
+
+a {
+  color: inherit; /* 상속받은 색상을 사용 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+a:hover {
+  text-decoration: underline; /* 마우스 호버 시 밑줄 표시 */
+}

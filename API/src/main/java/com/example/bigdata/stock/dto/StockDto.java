@@ -79,6 +79,7 @@ public class StockDto {
 
         // 예측가
         private Double predicted;
+        private LocalDate lastStockDate;
         private LocalDate predictedDate;
 
 
