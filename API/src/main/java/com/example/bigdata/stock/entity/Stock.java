@@ -44,13 +44,15 @@ public class Stock {
     // 변동률
     private BigDecimal changes;
 
+    // 예측 값
     private Double predicted;
+
+    // 종목 코드
+    private int code;
 
     @Builder
     public Stock(String company,LocalDate date, Integer open, Integer high, Integer low, Integer close,
-        Integer volume,
-        BigDecimal changes,
-        Double predicted) {
+        Integer volume, BigDecimal changes, Double predicted,int code) {
         this.company = company;
         this.date = date;
         this.open = open;
@@ -60,6 +62,7 @@ public class Stock {
         this.volume = volume;
         this.changes = changes;
         this.predicted = predicted;
+        this.code = code;
     }
 
 
@@ -67,5 +70,9 @@ public class Stock {
 
     public void setPredicted(Double predicted) {
         this.predicted = predicted;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

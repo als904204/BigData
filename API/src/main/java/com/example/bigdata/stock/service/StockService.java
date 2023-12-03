@@ -43,6 +43,8 @@ public class StockService {
     private static final int VOLUME_CELL = 5;
     private static final int CHANGE_CELL = 6;
     private static final int PREDICTED_CELL = 7;
+    private static final int CODE_CELL = 8;
+
 
 
     // todo : 같은 종목을 업로드 했을 때, 업데이트
@@ -87,8 +89,12 @@ public class StockService {
                     .build();
 
                 Cell predictedCell = currentRow.getCell(PREDICTED_CELL);
-                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC) {
+                Cell codeCell = currentRow.getCell(CODE_CELL);
+
+                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC
+                    && codeCell != null) {
                     stock.setPredicted(predictedCell.getNumericCellValue());
+                    stock.setCode((int) codeCell.getNumericCellValue());
                 }
 
                 stocks.add(stock);
@@ -130,13 +136,14 @@ public class StockService {
             .divide(BigDecimal.valueOf(4), 2, RoundingMode.HALF_UP);
     }
 
-    // Stock 예측가
+    // Stock 예측 가
     public PredictedDtoRes getStockPredicted(String company) {
         LocalDate firstStockDate = stockRepository.findFirstDateByCompany(company)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
 
         LocalDate lastStockDate = stockRepository.findLastDateByCompany(company)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
+        lastStockDate = lastStockDate.plusDays(1);
 
         Stock firstStock = stockRepository.findByCompanyAndDate(company, firstStockDate)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
