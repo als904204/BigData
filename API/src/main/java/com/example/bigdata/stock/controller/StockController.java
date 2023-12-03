@@ -39,6 +39,7 @@ public class StockController {
         return ResponseEntity.ok(stocks);
     }
 
+    // 예측 값
     @GetMapping("/predicted/{company}")
     public ResponseEntity<PredictedDtoRes> getStockPredicted(@PathVariable String company) {
         PredictedDtoRes stockPredicted = stockService.getStockPredicted(company);

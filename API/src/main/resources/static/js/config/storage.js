@@ -33,6 +33,7 @@ function checkUploadStatus() {
       fetchStockDateRangeData(uploadedCompany);
       fetchRecentStockData(uploadedCompany);
       fetchStockPredicted(uploadedCompany);
+      fetchStockCrawling(uploadedCompany);
     }
   } else { // 업로드 X 라면 업로드 버튼 활성화
     changeToSelectButton();

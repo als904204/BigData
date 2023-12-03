@@ -40,6 +40,9 @@ $(document).ready(function(){
         // 예측 데이터
         fetchStockPredicted(companyName);
 
+        // 뉴스기사 크롤링
+        fetchStockCrawling(companyName);
+
       },
       error: function (error) {
         console.log('Error occurred during file upload');

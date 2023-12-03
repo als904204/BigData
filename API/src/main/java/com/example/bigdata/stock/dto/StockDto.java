@@ -81,6 +81,7 @@ public class StockDto {
         private Double predicted;
         private LocalDate predictedDate;
 
+
     }
 
 
