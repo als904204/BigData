@@ -10,6 +10,7 @@ function fetchStockDateRangeData(companyName){
       $('#lastDate').text(data.lastDate);
       $('#nav-stock-name-top').text(companyName.toUpperCase());
       $('#nav-stock-name-left').text(companyName.toUpperCase());
+      $('#nav-stock-name-left-info').text(companyName.toUpperCase()+' Information');
     },
     error: function (error){
       console.error('Error fetching stock data:', error);

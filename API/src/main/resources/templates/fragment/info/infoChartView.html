@@ -1,0 +1,54 @@
+<!-- 왼쪽 메뉴 바 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="infoChart">
+
+  <!-- Row START -->
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <!-- Prediction Card START -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">예측 정보</h6>
+        </div>
+        <div class="card-body">
+          <h5 id="predicted" class="font-weight-bold">예측값을 불러오는 중입니다...</h5>
+          <h6 id="predicted-date" class="text-muted">예측날짜를 불러오는 중입니다...</h6>
+        </div>
+      </div>
+      <!-- Prediction Card END -->
+
+      <!-- News Card START -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">최근 뉴스</h6>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">뉴스 제목 1</li>
+            <li class="list-group-item">뉴스 제목 2</li>
+            <li class="list-group-item">뉴스 제목 3</li>
+            <!-- 추가 뉴스 제목 -->
+          </ul>
+        </div>
+      </div>
+      <!-- News Card END -->
+
+      <!-- Investment Opinion Card START -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">투자 의견</h6>
+        </div>
+        <div class="card-body">
+          <p>여기에 투자에 대한 전문가 의견이나 분석 내용을 넣을 수 있습니다. 이 내용은 시장 분석가나 금융 전문가의 견해를 반영할 수 있으며, 투자 결정을 내리는 데 도움을 줄 수 있습니다.</p>
+        </div>
+      </div>
+      <!-- Investment Opinion Card END -->
+    </div>
+  </div>
+  <!-- Row END -->
+
+
+</div>
+</html>

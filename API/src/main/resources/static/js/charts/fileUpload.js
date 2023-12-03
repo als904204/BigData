@@ -37,6 +37,8 @@ $(document).ready(function(){
         fetchStockDataForYesterday(companyName)
         fetchStockDateRangeData(companyName);
 
+        // 예측 데이터
+        fetchStockPredicted(companyName);
 
       },
       error: function (error) {
