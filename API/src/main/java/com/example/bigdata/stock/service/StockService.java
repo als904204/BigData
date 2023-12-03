@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -39,6 +41,7 @@ public class StockService {
     private static final int CLOSE_CELL = 4;
     private static final int VOLUME_CELL = 5;
     private static final int CHANGE_CELL = 6;
+    private static final int PREDICTED_CELL = 7;
 
 
     // todo : 같은 종목을 업로드 했을 때, 업데이트
@@ -82,6 +85,11 @@ public class StockService {
                         BigDecimal.valueOf(currentRow.getCell(CHANGE_CELL).getNumericCellValue()))
                     .build();
 
+                Cell predictedCell = currentRow.getCell(PREDICTED_CELL);
+                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC) {
+                    stock.setPredicted(predictedCell.getNumericCellValue());
+                }
+
                 stocks.add(stock);
             }
 
@@ -89,7 +97,7 @@ public class StockService {
             List<Stock> stockList = stockRepository.saveAll(stocks);
             log.info("You have successfully saved your {} excel file (size={})",
                 file.getOriginalFilename(), stockList.size());
-
+            workbook.close();
             return new UploadRes(companyName);
         } catch (IOException e) {
             log.error("Error reading an Excel file={}", e.getMessage());
@@ -105,7 +113,6 @@ public class StockService {
             log.error("no datas the company={}",company);
             throw new RuntimeException("no datas");
         }
-
 
         return stocks.stream()
             .map(StockDtoRes::new)
