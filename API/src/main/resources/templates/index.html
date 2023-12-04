@@ -7,6 +7,8 @@
 <div id="wrapper">
     <div th:replace="~{fragment/layout/nav-left.html :: nav-left}"></div>
     <div id="content-wrapper" class="d-flex flex-column">
+        <div th:replace="~{fragment/layout/nav-top-upload.html :: nav-top-upload}"></div>
+
         <div class="container-fluid">
             <!-- 여기까지 공통 -->
 
@@ -22,10 +24,12 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>1. Colab 런타임 설정</h2>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=usX9BXAiTrgz" target="_blank">1. Colab 런타임 설정</a></h2>
                         <ul>
                             <li class="mb-2"><a th:href="@{https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=qCb1OCL98DWL}">Colab</a> 에 접속하여
-                            <span class="font-weight-bold">1. 라이브러리 설치 (finance-DataReader)</span> 부분만 실행합니다<br/><small>(약3분가량 소모됩니다)</small><br/>
+                            <span class="font-weight-bold">
+                                <a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=usX9BXAiTrgz">
+                                    1. 라이브러리 설치 (finance-DataReader)</a></span> 부분만 실행합니다<br/><small>(약3분가량 소모됩니다)</small><br/>
                             </li>
                             <li class="mb-2">
                                 성공적으로 라이브러리들이 다운로드되면 <span class="font-weight-bold">런타임-다시 시작</span> 버튼 클릭을 클릭합니다<br/>
@@ -42,19 +46,22 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2>2. 주식 종목 선택</h2>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=ODwgQfQhT053" target="_blank">
+                            2. 주식 종목 선택
+                        </a></h2>
                         <ul>
                             <li class="mb-2">
-                                <span class="font-weight-bold">주식 종목 선택<small>2(>)</small></span>을 클릭하여 숨겨진 셀을 확장합니다
+                                <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=evXP5APKIOHA&line=3&uniqifier=1" target="_blank">주식 종목 선택<small>2(>)</small></a>
+                                </span>을 클릭하여 숨겨진 셀을 확장합니다
                             </li>
                             <li class="mb-2">
-                                <span class="font-weight-bold">주식 종목 범위로 찾기<small>2-2</small></span>에서 범위를 입력합니다<small class="font-weight-bold"> find_stock_by_range(0, 10)</small>
+                                <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=h0dr17m_EAhS&line=1&uniqifier=1" target="_blank">주식 종목 범위로 찾기<small>2-2</small></a> </span>에서 범위를 입력합니다<small class="font-weight-bold"> find_stock_by_range(0, 10)</small>
                             </li>
                             <li class="mb-2">
-                                <span class="font-weight-bold">주식 종목 이름으로 선택<small>2-3</small></span>에서 주식종목을 입력합니다 <small class="font-weight-bold">find_stock_code_by_name('삼성전자')</small>
+                                <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=5o_d8HloShZq&line=3&uniqifier=1" target="_blank">주식 종목 이름으로 선택<small>2-3</small></a></span>에서 주식종목을 입력합니다 <small class="font-weight-bold">find_stock_code_by_name('삼성전자')</small>
                             </li>
                             <li class="mb-2">
-                                <span>이제 <span class="font-weight-bold">stock_df</span><small>2-4</small> 변수에 위에서 선택한 주식 종목 데이터 프레임이 저장됩니다 </span>
+                                <span>이제 <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=mw9inF3kXeWh&line=1&uniqifier=1" target="_blank">stock_df<small>2-4</small> </a></span>변수에 위에서 선택한 주식 종목 데이터 프레임이 저장됩니다 </span>
                             </li>
                         </ul>
                         <hr/>
@@ -63,13 +70,13 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>3. 데이터 전처리</h2>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=xTlT76fiYiMz" target="_blank">3. 데이터 전처리</a></h2>
                         <ul>
                             <li class="mb-2">
-                                <span class="font-weight-bold">null값처리<small>3-1</small></span>에서 null 값을 처리합니다
+                                <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=xTlT76fiYiMz" target="_blank">null값처리<small>3-1</small></a></span>에서 null 값을 처리합니다
                             </li>
                             <li class="mb-2">
-                                <span class="font-weight-bold">(시가,고가,저가,거래량) 결측치 전처리<small>3-2</small></span>에서 결측된 값(0) <small>['Open', 'High', 'Low', 'Volume']</small>을 처리합니다
+                                <span class="font-weight-bold"><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=xTlT76fiYiMz" target="_blank">(시가,고가,저가,거래량) 결측치 전처리<small>3-2</small></a></span>에서 결측된 값(0) <small>['Open', 'High', 'Low', 'Volume']</small>을 처리합니다
                             </li>
                         </ul>
                         <hr/>
@@ -78,7 +85,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>4. 데이터 시각화 목록</h2>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=WYmchC_wb5qL" target="_blank">4. 데이터 시각화 목록</a></h2>
                         <ul>
                             <li class="mb-2">
                                 Closing Price
@@ -101,8 +108,12 @@
 
                 <div class="row mb-4">
                     <div class="col-lg-12">
-                        <h2>5. 예측 값</h2>
-                        <p>작성중..</p>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=qCb1OCL98DWL" target="_blank">5. 주가 예측</a></h2>
+                        <ul>
+                            <li class="mb-2">
+                                선형 회귀 모델을 사용하여 최근 몇 일 간의 주식 데이터(오픈 가격, 최고가, 최저가, 거래량)를 분석하여 다음 날 종가를 예측합니다
+                            </li>
+                        </ul>
                         <hr/>
                     </div>
                 </div>
@@ -110,7 +121,7 @@
 
                 <div class="row mb-4">
                     <div class="col-lg-12">
-                        <h2>6. 엑셀 파일 다운로드</h2>
+                        <h2><a href="https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=ZIrgZl13jFvh" target="_blank">6. 엑셀 파일 다운로드</a></h2>
                             <ul>
                                 <li>
                                     선택한 종목의 영어 이름으로 엑셀 파일이 저장됩니다.
@@ -124,7 +135,7 @@
 
                 <div class="row mb-4">
                     <div class="col-lg-12">
-                        <h2>7. 엑셀 파일 업로드</h2>
+                        <h2><a href="" target="_blank">7. 엑셀 파일 업로드</a></h2>
                         <ul>
                             <li>
                                 왼쪽 상단에 원하시는 Chart 메뉴를 선택한 다음 <span class="font-weight-bold">파일선택</span> 버튼을 눌러 다운받은 엑셀 파일을 업로드합니다

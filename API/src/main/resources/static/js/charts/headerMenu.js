@@ -66,11 +66,11 @@ function fetchStockDataForYesterday(companyName){
       $('#currentLow').text(formatNumber(currentLow));
       $('#currentVolume').text(formatNumber(currentVolume));
 
-      $('#prevClose').text(formatNumber(prevClose));
-      $('#prevAvgPrice').text(formatNumber(prevAvgPrice));
-      $('#prevHigh').text(formatNumber(prevHigh));
-      $('#prevLow').text(formatNumber(prevLow));
-      $('#prevVolume').text(formatNumber(prevVolume));
+      $('#prevClose').text(formatNumber(prevClose)+" (전날)");
+      $('#prevAvgPrice').text(formatNumber(prevAvgPrice)+" (전날)");
+      $('#prevHigh').text(formatNumber(prevHigh)+" (전날)");
+      $('#prevLow').text(formatNumber(prevLow)+" (전날)");
+      $('#prevVolume').text(formatNumber(prevVolume)+" (전날)");
 
       $('#closePercentage').text(" | " + closePercentage + "%");
       $('#avgPercentage').text(" | " + cvgPercentage + "%");
