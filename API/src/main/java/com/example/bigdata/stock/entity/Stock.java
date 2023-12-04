@@ -50,6 +50,9 @@ public class Stock {
     // 종목 코드
     private String code;
 
+    // 이동 평균선 분석 의견
+    private String opinion;
+
     @Builder
     public Stock(String company,LocalDate date, Integer open, Integer high, Integer low, Integer close,
         Integer volume, BigDecimal changes, Double predicted,String code) {
@@ -74,5 +77,9 @@ public class Stock {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 }

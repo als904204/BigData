@@ -34,6 +34,7 @@ public class ExcelDataService {
     private static final int CHANGE_CELL = 6;
     private static final int PREDICTED_CELL = 7;
     private static final int CODE_CELL = 8;
+    private static final int OPINION_CELL = 9;
 
     private final StockRepository stockRepository;
     @Transactional
@@ -110,9 +111,16 @@ public class ExcelDataService {
         if (codeCell != null) {
             if (codeCell.getCellType() == CellType.NUMERIC) {
                 stock.setCode(String.valueOf((int) codeCell.getNumericCellValue()));
+                System.out.println("stock.getCode() = " + stock.getCode());
             } else if (codeCell.getCellType() == CellType.STRING) {
                 stock.setCode(codeCell.getStringCellValue());
             }
+        }
+
+        // 이동 평균선 분석 의견
+        Cell opinionCell = currentRow.getCell(OPINION_CELL);
+        if (opinionCell != null && opinionCell.getCellType() == CellType.STRING) {
+            stock.setOpinion(opinionCell.getStringCellValue());
         }
 
         return stock;
