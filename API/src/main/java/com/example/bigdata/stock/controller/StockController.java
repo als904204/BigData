@@ -7,6 +7,7 @@ import com.example.bigdata.stock.dto.StockDto.StockStatisticsDtoRes;
 import com.example.bigdata.stock.dto.StockDto.CurrentAndPreviousStock;
 import com.example.bigdata.stock.dto.UploadFileDto.UploadRes;
 import com.example.bigdata.stock.service.StockService;
+import com.example.bigdata.stock.service.ExcelDataService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class StockController {
 
     private final StockService stockService;
+    private final ExcelDataService excelDataService;
 
     // 엑셀 업로드
     @PostMapping
     public ResponseEntity<UploadRes> uploadFile(@RequestParam("file") MultipartFile file) {
-        UploadRes uploadRes = stockService.readAndSaveExcelData(file);
+        UploadRes uploadRes = excelDataService.readAndSaveExcelData(file);
         return ResponseEntity.ok(uploadRes);
     }
 

@@ -5,28 +5,18 @@ import com.example.bigdata.stock.dto.StockDto.PredictedDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockDtoRes;
 import com.example.bigdata.stock.dto.StockDto.StockStatisticsDtoRes;
 import com.example.bigdata.stock.dto.StockDto.CurrentAndPreviousStock;
-import com.example.bigdata.stock.dto.UploadFileDto.UploadRes;
 import com.example.bigdata.stock.entity.Stock;
 import com.example.bigdata.stock.repository.StockRepository;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -34,93 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class StockService {
 
     private final StockRepository stockRepository;
-
-    private static final int DATA_CELL = 0;
-    private static final int OPEN_CELL = 1;
-    private static final int HIGH_CELL = 2;
-    private static final int LOW_CELL = 3;
-    private static final int CLOSE_CELL = 4;
-    private static final int VOLUME_CELL = 5;
-    private static final int CHANGE_CELL = 6;
-    private static final int PREDICTED_CELL = 7;
-    private static final int CODE_CELL = 8;
-
-
-
-    // todo : 같은 종목을 업로드 했을 때, 업데이트
-    @Transactional
-    public UploadRes readAndSaveExcelData(MultipartFile file) {
-        String companyName = extractCompanyName(file.getOriginalFilename());;
-
-
-        // companyName 으로 db 에 이미 업로드 된 종목이면 바로 리턴
-        if (stockRepository.existsByCompany(companyName)) {
-            log.info("Data for {} already exists", companyName);
-            return new UploadRes(companyName);
-        }
-
-        try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
-            log.info("Reading the excel file....");
-            log.info("file.getOriginalFilename()={}", file.getOriginalFilename());
-
-            Sheet sheet = workbook.getSheetAt(0);
-
-            Iterator<Row> rows = sheet.iterator();
-            List<Stock> stocks = new ArrayList<>();
-            while (rows.hasNext()) {
-                Row currentRow = rows.next();
-
-                // 첫 번째 행(컬럼 속성)은 건너뜀
-                if (currentRow.getRowNum() == 0) {
-                    continue;
-                }
-
-                // 엑셀 파일의 각 행에서 데이터를 읽어와 Stock 객체 생성
-                Stock stock = Stock.builder()
-                    .company(companyName)
-                    .date(currentRow.getCell(DATA_CELL).getLocalDateTimeCellValue().toLocalDate())
-                    .open((int) currentRow.getCell(OPEN_CELL).getNumericCellValue())
-                    .high((int) currentRow.getCell(HIGH_CELL).getNumericCellValue())
-                    .low((int) currentRow.getCell(LOW_CELL).getNumericCellValue())
-                    .close((int) currentRow.getCell(CLOSE_CELL).getNumericCellValue())
-                    .volume((int) currentRow.getCell(VOLUME_CELL).getNumericCellValue())
-                    .changes(
-                        BigDecimal.valueOf(currentRow.getCell(CHANGE_CELL).getNumericCellValue()))
-                    .build();
-
-                Cell predictedCell = currentRow.getCell(PREDICTED_CELL);
-                Cell codeCell = currentRow.getCell(CODE_CELL);
-
-                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC) {
-                    stock.setPredicted(predictedCell.getNumericCellValue());
-                }
-
-                if (codeCell != null) {
-                    if (codeCell.getCellType() == CellType.NUMERIC) {
-                        // 숫자 형태의 셀인 경우
-                        log.info("숫자");
-                        stock.setCode(String.valueOf((int) codeCell.getNumericCellValue()));
-                    } else if (codeCell.getCellType() == CellType.STRING) {
-                        // 문자열 형태의 셀인 경우
-                        log.info("문자");
-                        stock.setCode(codeCell.getStringCellValue());
-                    }
-                }
-
-                stocks.add(stock);
-            }
-
-            // DB에 모든 Stock 객체 저장
-            List<Stock> stockList = stockRepository.saveAll(stocks);
-            log.info("You have successfully saved your {} excel file (size={})",
-                file.getOriginalFilename(), stockList.size());
-            workbook.close();
-            return new UploadRes(companyName);
-        } catch (IOException e) {
-            log.error("Error reading an Excel file={}", e.getMessage());
-            throw new RuntimeException("Error reading an Excel file", e);
-        }
-    }
 
     @Transactional(readOnly = true)
     public List<StockDtoRes> getStockDataByCompany(String company) {
@@ -271,21 +174,6 @@ public class StockService {
         stockData.get(1).setAveragePrice(previousStockAvgPrice);
 
         return stockData;
-    }
-
-    // 엑셀 파일이름으로 해당 종목 추출
-    private String extractCompanyName(String filename) {
-
-        if (filename == null || !filename.contains("_")) {
-            log.error("Invalid file name format. Expected format 'companyName_' OR Not null");
-            throw new RuntimeException(
-                "Invalid file name format. Expected format 'companyName_' OR Not null");
-        }
-        int underscoreIndex = filename.indexOf("_");
-        if (underscoreIndex != -1) {
-            return filename.substring(0, underscoreIndex);
-        }
-        return filename;
     }
 
     // 해당 데이터의 최신데이터를 가져오는데 만약 없으면 7일전까지 검사
