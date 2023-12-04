@@ -12,6 +12,8 @@ function fetchStockPredicted(companyName){
 
       $('#predicted-start').text("AI를 이용한 다음 예측 값은(");
       $('#predicted-end').text("원 입니다");
+
+      $('#opinion').text(data.opinion);
       const diff = data.difference.toFixed(2);
       const percent = data.percentageChange.toFixed(2);
 

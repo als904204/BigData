@@ -24,4 +24,9 @@ public class IndexController {
     public String chartInfo(){
         return "fragment/info/infoChartPage";
     }
+
+    @GetMapping("/chart/news")
+    public String chartNews(){
+        return "fragment/info/newsPage";
+    }
 }
