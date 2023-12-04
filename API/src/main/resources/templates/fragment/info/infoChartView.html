@@ -5,11 +5,11 @@
 <div th:fragment="infoChart">
 
   <!-- Row START -->
-  <div class="row container">
+  <div class="row">
 
     <!-- Prediction Card START -->
     <div class="col-lg-5 mb-4">
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4 ai-card">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">AI를 이용한 다음 종가 예측</h6>
       </div>
@@ -23,7 +23,7 @@
           <span id="predicted-guess"></span>
           <br/>
           <hr/>
-          <span class="font-weight-bold text-danger">주의: 간단한 AI 기반 예측에 대한 경고</span>
+          <span class="font-weight-bold text-danger mt-3">주의: 간단한 AI 기반 예측에 대한 경고</span>
           <small class="d-block">
             이 페이지에 표시된 종가 예측 결과는 인공지능(AI) 기반의 간단한 선형 회귀 모델을 사용하여 생성되었습니다.
             이 모델은 최근 몇 일 간의 주식 데이터(오픈 가격, 최고가, 최저가, 거래량)를 분석하여 단기간 내의 다음 날 종가를 예측합니다.

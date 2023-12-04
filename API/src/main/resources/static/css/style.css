@@ -34,6 +34,11 @@ a:hover {
   overflow: auto; /* 스크롤바 추가 */
 }
 
+.ai-card .card-body {
+  height: 18.6rem;
+
+}
+
 .python-card .python-code {
   text-align: left; /* 코드를 왼쪽으로 정렬 */
 }
