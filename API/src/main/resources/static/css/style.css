@@ -26,3 +26,14 @@ a {
 a:hover {
   text-decoration: underline; /* 마우스 호버 시 밑줄 표시 */
 }
+
+
+/* 오직 python-card 클래스가 적용된 카드에 대한 스타일 */
+.python-card .card-body {
+  height: 18.6rem;
+  overflow: auto; /* 스크롤바 추가 */
+}
+
+.python-card .python-code {
+  text-align: left; /* 코드를 왼쪽으로 정렬 */
+}

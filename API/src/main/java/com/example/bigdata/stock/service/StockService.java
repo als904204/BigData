@@ -98,9 +98,11 @@ public class StockService {
                 if (codeCell != null) {
                     if (codeCell.getCellType() == CellType.NUMERIC) {
                         // 숫자 형태의 셀인 경우
+                        log.info("숫자");
                         stock.setCode(String.valueOf((int) codeCell.getNumericCellValue()));
                     } else if (codeCell.getCellType() == CellType.STRING) {
                         // 문자열 형태의 셀인 경우
+                        log.info("문자");
                         stock.setCode(codeCell.getStringCellValue());
                     }
                 }
