@@ -48,11 +48,11 @@ public class Stock {
     private Double predicted;
 
     // 종목 코드
-    private int code;
+    private String code;
 
     @Builder
     public Stock(String company,LocalDate date, Integer open, Integer high, Integer low, Integer close,
-        Integer volume, BigDecimal changes, Double predicted,int code) {
+        Integer volume, BigDecimal changes, Double predicted,String code) {
         this.company = company;
         this.date = date;
         this.open = open;
@@ -72,7 +72,7 @@ public class Stock {
         this.predicted = predicted;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 }

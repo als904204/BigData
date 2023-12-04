@@ -91,10 +91,18 @@ public class StockService {
                 Cell predictedCell = currentRow.getCell(PREDICTED_CELL);
                 Cell codeCell = currentRow.getCell(CODE_CELL);
 
-                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC
-                    && codeCell != null) {
+                if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC) {
                     stock.setPredicted(predictedCell.getNumericCellValue());
-                    stock.setCode((int) codeCell.getNumericCellValue());
+                }
+
+                if (codeCell != null) {
+                    if (codeCell.getCellType() == CellType.NUMERIC) {
+                        // 숫자 형태의 셀인 경우
+                        stock.setCode(String.valueOf((int) codeCell.getNumericCellValue()));
+                    } else if (codeCell.getCellType() == CellType.STRING) {
+                        // 문자열 형태의 셀인 경우
+                        stock.setCode(codeCell.getStringCellValue());
+                    }
                 }
 
                 stocks.add(stock);

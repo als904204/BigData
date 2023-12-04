@@ -30,7 +30,7 @@ public class CrawlingService {
             () -> new RuntimeException(
                 "can't find stock for CrawlingService.findByCompanyAndDate"));
 
-        int stockCode = stock.getCode();
+        String stockCode = stock.getCode();
 
         // 1. code 를 가져온다
         String code = String.valueOf(stockCode);
