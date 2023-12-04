@@ -37,11 +37,14 @@ public class ExcelDataService {
     private static final int OPINION_CELL = 9;
 
     private final StockRepository stockRepository;
+
+    // TODO : 업데이트 할 때, 예측 값, 분석 의견 업뎃
     @Transactional
     public UploadRes readAndSaveExcelData(MultipartFile file) {
 
         String companyName = extractCompanyName(file.getOriginalFilename());
         LocalDate lastDateInDB = null;
+        LocalDate firstDateInDB = null;
 
         boolean isAlreadySaved = stockRepository.existsByCompany(companyName);
 
@@ -52,6 +55,12 @@ public class ExcelDataService {
             // 이미 있는 데이터의 마지막 날짜를 가져옴
             lastDateInDB = stockRepository.findLastDateByCompany(companyName).orElseThrow(()-> new RuntimeException(
                 "no data for last"));
+            // 이미 있는 첫번째 마지막 날짜를 가져옴
+            firstDateInDB = stockRepository.findFirstDateByCompany(companyName)
+                .orElseThrow(() -> new RuntimeException(
+                    "no data for last"));
+
+
         }
 
 
@@ -77,10 +86,13 @@ public class ExcelDataService {
                     continue;
                 }
                 Stock stock = createStockFromRow(companyName, currentRow);
+
                 stocksToSaveOrUpdate.add(stock);
             }
 
             stockRepository.saveAll(stocksToSaveOrUpdate);
+
+
             return new UploadRes(companyName);
             
         }catch (IOException e) {
