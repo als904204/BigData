@@ -7,8 +7,23 @@ function fetchStockPredicted(companyName){
     success: function (data) {
       console.log("predicted : ",data);
       $('#predicted').text(formatNumber(data.predicted.toFixed(1)));
-      $('#predicted-date').text(data.predictedDate);
+      $('#predicted-date').text(data.predictedDate+")");
       $('#predicted-date-previous').text(data.lastStockDate);
+
+      $('#predicted-start').text("AI를 이용한 다음 예측 값은(");
+      $('#predicted-end').text("원 입니다");
+
+      const diff = data.difference.toFixed(2);
+      const percent = data.percentageChange.toFixed(2);
+
+      // 예측가가 마이너스라면
+      if (!isPositive(diff)) {
+        $('#predicted-guess').html(`전날 대비 <span class="text-primary">${diff} 원이 (${percent}%) <strong>감소</strong></span> 될 것으로 예측됩니다`);
+      } else {
+        $('#predicted-guess').html(`전날 대비 <span class="text-danger">${diff} 원이 (${percent}%) <strong>증가</strong></span> 될 것으로 예측됩니다`);
+      }
+
+
     },
     error: function (error){
       console.error('Error fetching stock predicted:', error);
@@ -56,3 +71,9 @@ function updateNewsList(newsData) {
 
   });
 }
+
+// 음수 양수
+isPositive = function(num) {
+  return num >= 0;
+};
+
