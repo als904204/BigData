@@ -81,6 +81,10 @@ public class StockDto {
         private Double predicted;
         private LocalDate lastStockDate;
         private LocalDate predictedDate;
+        // 예측값과 실제 종가의 차이
+        private double difference;
+        // 변화율 (백분율)
+        private double percentageChange;
 
 
     }

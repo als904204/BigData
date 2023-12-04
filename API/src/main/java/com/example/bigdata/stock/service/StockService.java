@@ -145,10 +145,22 @@ public class StockService {
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
         LocalDate predictedDate = lastStockDate.plusDays(1);
 
+        // 예측 값 가져오기 (예측값은 0번쨰 Stock 이 가지고 있음)
         Stock firstStock = stockRepository.findByCompanyAndDate(company, firstStockDate)
             .orElseThrow(() -> new RuntimeException("There is no stock data"));
         Double predicted = firstStock.getPredicted();
-        return new PredictedDtoRes(predicted, lastStockDate,predictedDate);
+
+        // 예측 값과 가장 최근 데이터를 비교하기 위해 최근 데이터 가져오기
+        Stock recentStock = stockRepository.findByCompanyAndDate(company, lastStockDate)
+            .orElseThrow(() -> new RuntimeException("There is no stock data"));
+
+        Integer recentStockClose = recentStock.getClose();
+
+        // 예측 값과 실제 값 비교
+        double difference = predicted - recentStockClose;
+        double percentageChange = (difference / recentStockClose) * 100;
+
+        return new PredictedDtoRes(predicted, lastStockDate,predictedDate,difference,percentageChange);
     }
 
     /**
