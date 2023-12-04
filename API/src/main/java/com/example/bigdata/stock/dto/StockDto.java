@@ -85,6 +85,8 @@ public class StockDto {
         private double difference;
         // 변화율 (백분율)
         private double percentageChange;
+        private String opinion;
+
 
 
     }

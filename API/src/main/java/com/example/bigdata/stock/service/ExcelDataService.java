@@ -111,7 +111,6 @@ public class ExcelDataService {
         if (codeCell != null) {
             if (codeCell.getCellType() == CellType.NUMERIC) {
                 stock.setCode(String.valueOf((int) codeCell.getNumericCellValue()));
-                System.out.println("stock.getCode() = " + stock.getCode());
             } else if (codeCell.getCellType() == CellType.STRING) {
                 stock.setCode(codeCell.getStringCellValue());
             }

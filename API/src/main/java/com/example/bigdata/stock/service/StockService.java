@@ -73,7 +73,10 @@ public class StockService {
         double difference = predicted - recentStockClose;
         double percentageChange = (difference / recentStockClose) * 100;
 
-        return new PredictedDtoRes(predicted, lastStockDate,predictedDate,difference,percentageChange);
+        // 이동 평균선 분석 의견
+        String opinion = firstStock.getOpinion();
+
+        return new PredictedDtoRes(predicted, lastStockDate,predictedDate,difference,percentageChange,opinion);
     }
 
     /**
