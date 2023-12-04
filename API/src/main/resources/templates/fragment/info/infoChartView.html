@@ -8,7 +8,7 @@
   <div class="row container">
 
     <!-- Prediction Card START -->
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-5 mb-4">
       <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">AI를 이용한 다음 종가 예측</h6>
@@ -36,15 +36,55 @@
     </div>
     <!-- Prediction Card END -->
 
-    <div class="col-lg-6 mb-4">
-      <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">AI예측 방법</h6>
-      </div>
+    <!-- Prediction Card START -->
+    <div class="col-lg-7 mb-4">
+      <div class="card shadow mb-4 python-card">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary"><a th:href="@{https://colab.research.google.com/drive/1kyICSeUYsDwX8F1teULJ97S9DIIqRQ1t#scrollTo=qCb1OCL98DWL}" target="_blank">예측에 사용된 코드<small>[바로가기]</small></a> </h6>
+        </div>
         <div class="card-body">
+          <pre class="python-code">
+            <code class="language-python">
+            # 전처리된 데이터 프레임의 index 를 datetime 로 변경
+            cleaned_stock_df.index = pd.to_datetime(cleaned_stock_df.index)
 
-          내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+            # 필요한 컬럼 선택 (오픈 가격, 최고가, 최저가, 거래량으로 다음 종가를 예측)
+            features = ['Open', 'High', 'Low', 'Volume']
+            target = 'Close'
 
+            # 전체 데이터로 모델 훈련
+            model = LinearRegression()
+            model.fit(cleaned_stock_df[features], cleaned_stock_df[target])
+
+            # 마지막 날짜로부터 하루 후 날짜 생성
+            last_date = cleaned_stock_df.index.max()
+            next_day = [last_date + timedelta(days=1)]
+
+            # 미래 데이터 예측을 위한 특성 생성 (마지막 알려진 값을 사용)
+            last_known_values = cleaned_stock_df.iloc[-1][features].values.reshape(1, -1)
+
+            # 다음 날 'Close' 값 예측
+            predicted_next_close = model.predict(last_known_values)
+
+            # 예측된 다음 날 데이터를 DataFrame으로 변환
+            predicted_next_day_df = pd.DataFrame(predicted_next_close, index=next_day, columns=['Predicted'])
+
+            # 현재까지의 실제 데이터와 다음 날 예측 데이터를 시각화
+            plt.figure(figsize=(14, 7))
+            plt.plot(stock_df['Close'], label='Actual Close Price')
+            plt.scatter(predicted_next_day_df.index, predicted_next_day_df['Predicted'], color='red', label='Predicted Next Day Close Price')
+            plt.title('Actual And Predicted Next Day Close Price')
+            plt.xlabel('Date')
+            plt.ylabel('Close Price (KRW)')
+            plt.legend()
+            plt.grid(True)
+            plt.show()
+
+            # 결과 확인
+            predicted_next_day_df
+
+            </code>
+          </pre>
         </div>
       </div>
     </div>
@@ -68,23 +108,13 @@
             </div>
         </div>
       </div>
-
-
       <!-- News Card END -->
 
-      <!-- Investment Opinion Card START -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">투자 의견</h6>
-        </div>
-        <div class="card-body">
-          <p>여기에 투자에 대한 전문가 의견이나 분석 내용을 넣을 수 있습니다. 이 내용은 시장 분석가나 금융 전문가의 견해를 반영할 수 있으며, 투자 결정을 내리는 데 도움을 줄 수 있습니다.</p>
-        </div>
-      </div>
-      <!-- Investment Opinion Card END -->
+
     </div>
   <!-- Row END -->
 
 
 </div>
+
 </html>
