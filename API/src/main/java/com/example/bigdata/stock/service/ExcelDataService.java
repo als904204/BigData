@@ -48,6 +48,8 @@ public class ExcelDataService {
 
         boolean isAlreadySaved = stockRepository.existsByCompany(companyName);
 
+        Stock existingFile = null;
+        
         // 데이터가 이미 존재한다면, 업데이트
         // lastDateInDB 변수에 이미 저장된 주식의 가장 최근 날짜 저장
         if (isAlreadySaved) {
@@ -57,10 +59,11 @@ public class ExcelDataService {
                 "no data for last"));
             // 이미 있는 첫번째 마지막 날짜를 가져옴
             firstDateInDB = stockRepository.findFirstDateByCompany(companyName)
-                .orElseThrow(() -> new RuntimeException(
-                    "no data for last"));
+                .orElseThrow(() -> new RuntimeException("no data for last"));
 
-
+            // 기존에 있는 첫번째 Stock 의 예측값,평균선 분석 의견 변경해야 함
+            existingFile = stockRepository.findByCompanyAndDate(companyName, firstDateInDB)
+                .orElseThrow(() -> new RuntimeException("no data for update predicted and opinion"));
         }
 
 
@@ -68,6 +71,31 @@ public class ExcelDataService {
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
             List<Stock> stocksToSaveOrUpdate = new ArrayList<>();
+
+            if (isAlreadySaved) {
+
+                if (rows.hasNext()) {
+                    rows.next();// 첫 번째 행(헤더) 건너뛰기
+                }
+                if (rows.hasNext()) {
+                    Row secondRow = rows.next(); // 두 번째 행 가져오기
+
+                    double updatePre = 0;
+                    Cell predictedCell = secondRow.getCell(PREDICTED_CELL);
+                    if (predictedCell != null && predictedCell.getCellType() == CellType.NUMERIC) {
+                        existingFile.setPredicted(predictedCell.getNumericCellValue());
+                    }
+
+                    String updateOpi = "";
+                    Cell opinionCell = secondRow.getCell(OPINION_CELL);
+                    if (opinionCell != null && opinionCell.getCellType() == CellType.STRING) {
+                        existingFile.setOpinion(opinionCell.getStringCellValue());
+                    }
+
+                }
+            }
+
+
 
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
@@ -78,6 +106,7 @@ public class ExcelDataService {
 
                 LocalDate date = currentRow.getCell(DATA_CELL).getLocalDateTimeCellValue()
                     .toLocalDate();
+
 
                 // 해당 회사의 주식 데이터가 이미 존재 (조건문이 참이면 없는 데이터만 저장 하면 됨)
                 // && 현재 처리 중인 행의 날짜(date)가 lastDateInDB 이후인 날짜가 아닐 때
@@ -154,3 +183,4 @@ public class ExcelDataService {
 
 
 }
+
