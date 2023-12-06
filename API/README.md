@@ -1,11 +1,31 @@
-작성중...
+# SQL
+```mariadb
+create database bigdata
+```
 
----
-# TOOD
-1. 날짜를 입력하면 해당 날짜의 거래 정보
+# application.yml
 
-2. 예측 그래프
+``` yaml
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/bigdata?allowPublicKeyRetrieval=true&useSSL=false
+    username: # DB USERNAME
+    password: # DB PASSWORD
 
-3. 구매시기,판매시기 예측 후 알림
+  jpa:
+    hibernate:
+      ddl-auto: create # 실행 후 none 
+    properties:
+      hibernate:
+        format_sql: true
+#        show_sql: true
 
-4. 몇개월 기준으로 저가에서 평균가로 돌아오는지, 고가에서 평균가로돌아 오는지 
+
+    
+```
