@@ -29,21 +29,21 @@ Python의 FinanceDataReader 라이브러리를 활용하여 KRX(한국거래소)
 
 ## View
 ### python
-![img_1.png](img_1.png)
+!
+![img_1.png](img/img_1.png)
 
-![img_2.png](img_2.png)
 
 
 API : Spring Boot를 통해 웹 애플리케이션에 업로드되어 JavaScript를 통해 시각적으로 표현됩니다. 이 웹 애플리케이션은 또한 선택된 주식 종목의 최신 뉴스를 크롤링하여 사용자에게 제공합니다.
 
 ###  SpringBoot And JS WEB
-![img_4.png](img_4.png)
+![img_4.png](img/img_4.png)
 
 ### Crawling
-![img_6.png](img_6.png)
+![img_6.png](img/img_6.png)
 
 ### Prediction
-![img_7.png](img_7.png)
+![img_7.png](img/img_7.png)
 
 # Tools 
 
